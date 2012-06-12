@@ -1,3 +1,26 @@
+<?php
+
+require_once 'lib/AccountVerifier.php';
+
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+	$verifier = new AccountVerifier();
+	$verifier->verifyAccount($_POST);
+	if (count($verifier->errors) === 0) {
+		// create account
+	} else {
+		// show errors
+		echo '<pre>';
+		print_r($verifier->errors);
+		die();
+	}
+
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
