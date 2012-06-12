@@ -6,7 +6,7 @@ require_once 'lib/AccountVerifier.php';
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 	$verifier = new AccountVerifier();
-	$verifier->verifyAccount($_POST);
+	$verifier->verifyInput($_POST);
 	if (count($verifier->errors) === 0) {
 		// create account
 	} else {

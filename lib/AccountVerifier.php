@@ -4,7 +4,7 @@ class AccountVerifier {
 
 	public $errors = array();
 
-	public function verifyAccount($input) {
+	public function verifyInput($input) {
 
 		$this->validateEmail($input['email']);
 		$this->validatePassword($input['password1'], $input['password2']);
@@ -16,11 +16,15 @@ class AccountVerifier {
 			$this->errors['email'] = 'Email must be provided.';
 		} else {
 			$emailAddress = filter_var($emailAddress, FILTER_VALIDATE_EMAIL);
+			if ($emailAddress === FALSE) {
+				$this->errors['email'] = 'Email is invalid format.';
+			} else {
 			// TODO check for existing user
 
-			list($user, $domain) = explode('@', $emailAddress);
-			if (!checkdnsrr($domain, 'mx')) {
-				$this->errors['email'] = sprintf("Domain of '%s' could not be validated.", $domain);
+				list($user, $domain) = explode('@', $emailAddress);
+				if (!checkdnsrr($domain, 'mx')) {
+					$this->errors['email'] = sprintf("Domain of '%s' could not be validated.", $domain);
+				}
 			}
 
 		}
@@ -31,9 +35,9 @@ class AccountVerifier {
 			$this->errors['password'] = 'Passwords cannot be blank.';
 		} else {
 			if ($password1 !== $password2) {
-				$this->errors['password'] = "Passwords do not match";	
-			} elseif ($this->strongPassword($password1)) {
-				$this->errors['password'] = "Password is weak";
+				$this->errors['password'] = "Passwords do not match.";	
+			} else {
+				$this->strongPassword($password1);				
 			}
 		}
 	}
