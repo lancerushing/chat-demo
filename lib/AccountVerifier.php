@@ -1,5 +1,7 @@
 <?php
 
+require_once 'UserAccount.php';
+
 class AccountVerifier {
 
 	public $errors = array();
@@ -19,7 +21,9 @@ class AccountVerifier {
 			if ($emailAddress === FALSE) {
 				$this->errors['email'] = 'Email is invalid format.';
 			} else {
-			// TODO check for existing user
+				if (UserAccount::getByEmailAddress($emailAddress) !== FALSE) {
+					$this->errors['email'] = 'Email address is already in use.';
+				}
 
 				list($user, $domain) = explode('@', $emailAddress);
 				if (!checkdnsrr($domain, 'mx')) {

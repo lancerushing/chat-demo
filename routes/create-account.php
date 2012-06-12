@@ -1,6 +1,8 @@
 <?php
 
 require_once 'lib/AccountVerifier.php';
+require_once 'lib/UserAccount.php';
+require_once 'lib/Bcrypt.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -8,7 +10,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 	$verifier = new AccountVerifier();
 	$verifier->verifyInput($_POST);
 	if (count($verifier->errors) === 0) {
+		$crypt = new Bcrypt();
+		$input = $_POST;
 		// create account
+		$userAccount = new UserAccount();
+		$userAccount->email = $input['email'];
+		$userAccount->password = $crypt->hash($input['password1']); 
+		$userAccount->firstName = $input['first_name'];
+		$userAccount->lastName = $input['last_name'];
+		$userAccount->save();
+
+		echo "<h2>Account Created</h2>";
+		exit;
 	} else {
 		// show errors
 		echo '<pre>';
@@ -17,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 	}
 
 }
-
 
 
 ?>
