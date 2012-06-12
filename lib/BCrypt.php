@@ -20,6 +20,10 @@ class BCrypt {
 		return crypt($input, $this->getSalt());
 	}
 
+	public function verify($input, $existingHash) {
+		$hash = crypt($input, $existingHash);
+		return $hash === $existingHash;
+	}
 
 	private function getSalt() {
 

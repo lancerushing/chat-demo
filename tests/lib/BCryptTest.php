@@ -1,6 +1,5 @@
 <?php
 
-
 require_once 'lib/BCrypt.php';
 
 class BCryptTest extends PHPUnit_Framework_TestCase {
@@ -18,9 +17,20 @@ class BCryptTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testHash() {
-		$this->bcrypt =  new BCrypt();
 		$hash = $this->bcrypt->hash("ThisIsATest");
 	}
+
+	public function testVerify() {
+		$password = "This is my test password.";
+		$hash = $this->bcrypt->hash($password);
+
+		$result = $this->bcrypt->verify($password, $hash);
+		$this->assertTrue($result);
+
+		$result = $this->bcrypt->verify("This is not the password.", $hash);
+		$this->assertFalse($result);
+	}
+
 
 	public function testGetSalt() {
 
@@ -34,7 +44,6 @@ class BCryptTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(29, strlen($salt));
 		
-
 	}
 
 
@@ -47,6 +56,5 @@ class BCryptTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(22, strlen($randomBytes));
 		
-
 	}
 }
