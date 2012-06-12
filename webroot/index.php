@@ -11,8 +11,10 @@ if (!isset($_SESSION['account'])) {
 $userAccount = $_SESSION['account'];
 
 
+require_once "../templates/header.php";
+
 echo "Welcome " . $userAccount->firstName;
 
-?>
+require_once "../templates/footer.php";
 
-<a href="/logout">Logout</a>
+ 

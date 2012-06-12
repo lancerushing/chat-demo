@@ -32,13 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 
 
+require_once "templates/header.php";
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Please Create an Account</title>
-</head>
-<body>
+
+<div id="createAccount">
 	<h1>Create an Account</h1>
 
 	<form action="/create-account" method="post">
@@ -61,5 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 		<button type="submit">Create Account</button>
 
 	</form>
-</body>
-</html>
+
+	or <a href="/login">Login</a>
+</div>
+
+<?php
+require_once "templates/footer.php";
+?>

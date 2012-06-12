@@ -27,14 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 }
 
+require_once "templates/header.php";
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>This is Chat App</title>
-</head>
-<body>
+<div id="loginForm">
 	<h1>Please Login</h1>
 
 	<form action="/login" method="post">
@@ -49,7 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 	</form>
 	or
 	<a href="/create-account">Create Account</a>
+</div>
+<?php
+require_once "templates/footer.php";
 
-</body>
-</html>
+?>
 

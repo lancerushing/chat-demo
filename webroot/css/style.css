@@ -215,17 +215,17 @@ td { vertical-align: top; }
 
 
 /* ==|== primary styles =====================================================
-   Author:
+   Author: Lance
    ========================================================================== */
 
+div#loginForm, div#createAccount {
+  text-align:center;
+}
 
-
-
-
-
-
-
-
+div#loginForm label, div#createAccount label {
+  display:block;
+  margin-bottom:10px;
+}
 
 
 
