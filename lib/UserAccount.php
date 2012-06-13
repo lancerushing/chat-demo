@@ -5,18 +5,26 @@ class UserAccount {
 	public $email, $password, $firstName, $lastName;
 
 	public function save() {
-		// TODO make better
-		file_put_contents("/tmp/" . $this->email, serialize($this));
+		$redis = self::connect();
+		$redis->set($this->email, $this);
+		
 
 	}
 
-	public static function getByEmailAddress($emailAddress) {
-		$testFileName = "/tmp/" . $emailAddress;
-		if (is_file($testFileName)) {
-			return unserialize(file_get_contents($testFileName));
-		}
+	public static function connect() {
 
-		return false;
+		$redis = new Redis();
+		$result = $redis->pconnect('127.0.0.1', 6379);
+		if ($result !== TRUE) {
+			throw new RuntimeException("Could not connect to DB.");
+		}
+		$redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_PHP); 
+		return $redis;
+	}
+
+	public static function getByEmailAddress($emailAddress) {
+		$redis = self::connect();
+		return $redis->get($emailAddress);
 
 	}
 
