@@ -17,19 +17,11 @@ class ChatThingyTest extends PHPUnit_Framework_TestCase {
 	private $redis;
 
 	protected function setUp() {
-		$this->setUpRedis();
+		$this->redis = getRedis();
 		$this->object = new ChatThingy($this->redis);
 	}
 
-	public function setUpRedis() {
-		$this->redis = new Redis();
-		$result = $this->redis->pconnect('127.0.0.1', 7777);
-			
-		if ($result !== TRUE) {
-			throw new RuntimeException("Could not connect to DB.");
-		}
-		$this->redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_PHP);
-	}
+	
 
 	public function testPush() {
 		$userAccount = new UserAccount();
@@ -42,7 +34,7 @@ class ChatThingyTest extends PHPUnit_Framework_TestCase {
 		$results = $this->object->poll($userAccount, $channel);
 		$this->assertEquals(array($message), $results);
 		
-		$this->redis->delete($this->redis->keys("*"));
+		cleanRedis();
 	}
 	
 	public function testPoll() {
