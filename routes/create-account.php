@@ -36,7 +36,7 @@ require_once "templates/header.php";
 ?>
 
 <div id="createAccount">
-	<h1>Create an Account</h1>
+	<h2>Create an Account</h2>
 
 	<form action="/create-account" method="post">
 		<label>First Name

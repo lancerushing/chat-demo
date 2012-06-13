@@ -7,22 +7,22 @@ require_once 'lib/Bcrypt.php';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-		$crypt = new Bcrypt();
-		$input = $_POST;
+	$crypt = new Bcrypt();
+	$input = $_POST;
 		// create account
-		$userAccount = UserAccount::getByEmailAddress($input['email']);
-		if ($userAccount !== FALSE) {
-			if ($crypt->verify($input['password'], $userAccount->password)) {
-				session_start();
-				$_SESSION['account'] = $userAccount;
+	$userAccount = UserAccount::getByEmailAddress($input['email']);
+	if ($userAccount !== FALSE) {
+		if ($crypt->verify($input['password'], $userAccount->password)) {
+			session_start();
+			$_SESSION['account'] = $userAccount;
 
-				header("Location: /");
-				
-			}	
-		}
+			header("Location: /");
 
-		echo "<h2>Invalid Login</h2>";
-		exit;
+		}	
+	}
+
+	echo "<h2>Invalid Login</h2>";
+	exit;
 	
 
 }
@@ -30,23 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 require_once "templates/header.php";
 ?>
 <div id="loginForm">
-	<h1>Please Login</h1>
+	<h2>Please Login</h2>
 
 	<form action="/login" method="post">
-		<label>Email
-			<input type="text" name="email">
-		</label>
-		<label>Password
-			<input type="password" name="password">
-		</label>
-		<button type="submit">Login</button>
+		<fieldset>
+			<label for="email">Email</label>
+			<input type="text" id="email" name="email">
 
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password">
+
+			<button type="submit">Login</button>
+		</fieldset>
 	</form>
 	or
 	<a href="/create-account">Create Account</a>
 </div>
 <?php
 require_once "templates/footer.php";
-
 ?>
-
