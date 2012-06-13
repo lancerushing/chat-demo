@@ -10,9 +10,13 @@ class ChatThingy {
 		$this->redis = $redis;
 	}
 
-	public function poll(UserAccount $userAccount, Array $params) {
-		$channel = $params['channel'];
+	public function post(Message $message, $channel) {
+		$chatKey = $this->getChatKey($channel);
+		$this->redis->rPush($chatKey, $message);
+	}
 
+	public function poll(UserAccount $userAccount, $channel) {
+		
 		$chatKey = $this->getChatKey($channel);
 		$userIndexKey = $this->getUserIndexKey($userAccount->email);
 

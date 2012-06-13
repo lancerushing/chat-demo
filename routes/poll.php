@@ -10,6 +10,6 @@ require_once "lib/ChatThingy.php";
 session_start();
 
 $chat = new ChatThingy($redis);
-$results = $chat->poll($_SESSION['account'], $_REQUEST);
+$results = $chat->poll($_SESSION['account'], $_REQUEST['channel']);
 
 echo json_encode($results);
