@@ -218,16 +218,113 @@ td { vertical-align: top; }
    Author: Lance
    ========================================================================== */
 
-div#loginForm, div#createAccount {
-  text-align:center;
+   body {
+    color: #696969;
+    font-family: Arial,Helvetica,sans-serif;
+  }
+  h2 {
+    font-size: 28px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu',arial,serif;
+    font-weight: lighter;
+    line-height: 1.4em;
+  }
+
+
+  div#loginForm, div#createAccount {
+    width:250px;
+    margin:0 auto;
+  }
+
+  div#loginForm label, div#createAccount label {
+    display:block;
+    font-size:14px;
+    line-height:2.5em;
+  }
+
+  div#loginForm input, div#createAccount input {
+    color: #606060;
+    font-size: 14px;
+    width: 282px;
+    border: 1px solid #CCC;
+    border-radius: 5px 5px 5px 5px ;
+    padding:10px 15px;
+  }
+
+  div#loginForm button, div#createAccount  button {
+
+    margin: 21px 0;
+    padding: 5px 0;
+    width: 150px;
+    color: #606060;
+    font-size: 14px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+
+a, a:visited {
+    color: #37B2D1;
+    text-decoration: none;
 }
 
-div#loginForm label, div#createAccount label {
-  display:block;
-  margin-bottom:10px;
+
+header, #header {
+  background: url("/img/header-bg.png") no-repeat scroll 0 0 #383838;
+  height: 180px;
+  color:#fefefe;
+
+
+   border-radius: 10px 10px 0 0;
+
 }
 
+footer {
+  background: url("/img/footer-bg.png") no-repeat scroll 0 0 #383838;
+  height: 200px;
+  margin-top:0px;
+  color:#fefefe;
+  padding:30px;
+   border-radius: 0 0 10px 10px;
+}
 
+#wrapper {
+  width: 966px;
+  margin: 20px auto;
+
+}
+
+#main {
+  padding-top:20px;
+  padding-bottom:40px;
+   background-color: white;
+}
+
+body {
+  background:url("/img/background.jpg") repeat scroll 0 0 #F1F1F1;
+}
+
+a#logo {
+  font-size:30px;
+  font-family:'Ubuntu', arial, sans-serif;
+  line-height:90px;
+  margin-left:30px;
+  text-shadow:-2px -1px rgba(0, 0, 0, 0.8);
+  color:#fefefe;
+
+}
+
+footer h6 {
+    ;
+    color: #D7D7D7;
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-shadow: -2px -1px rgba(0, 0, 0, 0.8);
+
+}
 
 
 
