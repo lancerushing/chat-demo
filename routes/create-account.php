@@ -3,6 +3,7 @@
 require_once 'lib/AccountVerifier.php';
 require_once 'lib/UserAccount.php';
 require_once 'lib/Bcrypt.php';
+require_once 'lib/Redis.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 		$userAccount->password = $crypt->hash($input['password1']); 
 		$userAccount->firstName = $input['first_name'];
 		$userAccount->lastName = $input['last_name'];
-		$userAccount->save();
+		$userAccount->save($redis);
 
 		echo "<h2>Account Created</h2>";
 		exit;

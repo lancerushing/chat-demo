@@ -7,7 +7,7 @@ class AccountVerifierTest extends PHPUnit_Framework_TestCase {
 	private $verifier;
 
 	public function setup() {
-		$this->verifier = new AccountVerifier();
+		$this->verifier = new AccountVerifier(getRedis());
 	}
 
 	public function testVerifyInput() {
@@ -24,6 +24,20 @@ class AccountVerifierTest extends PHPUnit_Framework_TestCase {
 
 	}
 
+	public function testValidateEmail_Duplicate() {
+		$dupAccount = new UserAccount();
+		$dupAccount->email = "duplicate@uptracs.com";
+		$dupAccount->save(getRedis());
+		
+		$method = new ReflectionMethod("AccountVerifier", "validateEmail");
+		$method->setAccessible(TRUE);
+
+		$method->invoke($this->verifier, "duplicate@uptracs.com");
+		$this->assertEquals("Email address is already in use.", $this->verifier->errors["email"]);
+		cleanRedis();
+	}
+	
+	
 	public function testValidateEmail_BadFormat() {
 		$method = new ReflectionMethod("AccountVerifier", "validateEmail");
 		$method->setAccessible(TRUE);

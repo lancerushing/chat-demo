@@ -1,30 +1,25 @@
 <?php
-
-
 require_once 'lib/UserAccount.php';
 require_once 'lib/Bcrypt.php';
+require_once 'lib/Redis.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
 	$crypt = new Bcrypt();
 	$input = $_POST;
-		// create account
-	$userAccount = UserAccount::getByEmailAddress($input['email']);
+	// create account
+	$userAccount = UserAccount::getByEmailAddress($redis, $input['email']);
 	if ($userAccount !== FALSE) {
 		if ($crypt->verify($input['password'], $userAccount->password)) {
 			session_start();
 			$_SESSION['account'] = $userAccount;
 
 			header("Location: /");
-
-		}	
+		}
 	}
 
 	echo "<h2>Invalid Login</h2>";
 	exit;
-	
-
 }
 
 require_once "templates/header.php";
@@ -48,4 +43,3 @@ require_once "templates/header.php";
 </div>
 <?php
 require_once "templates/footer.php";
-?>

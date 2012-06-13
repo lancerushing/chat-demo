@@ -5,6 +5,16 @@ require_once 'UserAccount.php';
 class AccountVerifier {
 
 	public $errors = array();
+	
+	/**
+	 * @var Redis
+	 */
+	private $redis;
+
+	public function __construct(Redis $redis) {
+		$this->redis = $redis;
+	}
+
 
 	public function verifyInput($input) {
 
@@ -21,7 +31,7 @@ class AccountVerifier {
 			if ($emailAddress === FALSE) {
 				$this->errors['email'] = 'Email is invalid format.';
 			} else {
-				if (UserAccount::getByEmailAddress($emailAddress) !== FALSE) {
+				if (UserAccount::getByEmailAddress($this->redis, $emailAddress) !== FALSE) {
 					$this->errors['email'] = 'Email address is already in use.';
 				}
 
