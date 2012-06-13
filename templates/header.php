@@ -15,6 +15,9 @@
   <title>Welcome to the Chat App</title>
   <meta name="description" content="">
 
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
+
   <!-- Mobile viewport optimized: h5bp.com/viewport -->
   <meta name="viewport" content="width=device-width">
 
@@ -33,11 +36,14 @@
   <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
        chromium.org/developers/how-tos/chrome-frame-getting-started -->
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <div id="wrapper">
   <header>
+    <a href="/" id="logo">Chat Demo</a>
+
     <?php
       if (isset($_SESSION['account'])) {
         echo '<a href="/logout">Logout</a>';
       }
     ?>
   </header>
-  <div role="main">
+  <div role="main" id="main">
