@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	verbose="true"
+	bootstrap="bootstrap.php"
+>
+	<php>
+		 <includePath>..</includePath>
+		 <ini name="foo" value="bar"/>
+	 </php>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../lib</directory>
+			<exclude>
+				<file>../lib/Redis.php</file>				
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>
