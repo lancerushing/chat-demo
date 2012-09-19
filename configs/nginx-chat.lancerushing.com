@@ -5,7 +5,7 @@ server {
 	server_name chat.lancerushing.com;
 
 	location / {
-		try_files $uri $uri/ /router;
+		try_files $uri /router;
 	}
 	
 	location /router {
