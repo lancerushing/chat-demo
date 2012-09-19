@@ -1,5 +1,12 @@
 <?php
 
+
+if (!isset($_SESSION['account'])) {
+    header("Location: /login");
+}
+
+
+
 require_once "templates/header.php";
 ?>
 
@@ -26,7 +33,6 @@ jQuery(document).ready(function () {
 
 
 	function updateChat(data) {
-		
 		$.each(data, function (index, message) {
 			chatArea.append(formatMessage(message));	
 		});
