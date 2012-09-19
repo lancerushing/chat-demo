@@ -2,7 +2,8 @@
 
 function startUpRedis() {
 	$pidfile = tempnam(sys_get_temp_dir(), "redis_pid_");
-	exec(sprintf("%s > %s 2>&1 & echo $! >> %s", "redis-server --port 7777 ", "/dev/null", $pidfile));
+	$cmd = sprintf("redis-server %s/redis.conf > %s 2>&1 & echo $! >> %s", __DIR__ , "/dev/null", $pidfile);
+	exec($cmd);
 }
 function getRedis() {
 	$redis = new Redis();
