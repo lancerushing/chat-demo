@@ -1,7 +1,7 @@
 <?php
 
 if(CRYPT_BLOWFISH != 1) {
-	throw new Exception("bcrypt is not supported.");
+	throw new Exception("bCrypt is not supported.");
 }
 
 class BCrypt {
@@ -10,7 +10,7 @@ class BCrypt {
 
 	public function __construct($rounds=12) {
 		if ($rounds < 4 || $rounds > 31) {
-			throw new RuntimeException("bcrypt rounds must be between 4 and 31");
+			throw new RuntimeException("bCrypt rounds must be between 4 and 31");
 		}
 		$this->rounds = $rounds;
 	}
