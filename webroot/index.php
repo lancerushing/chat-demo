@@ -1,20 +1,24 @@
 <?php
 
-require_once '../lib/UserAccount.php';
+require_once 'lib/UserAccount.php';
 
 session_start();
 if (!isset($_SESSION['account'])) {
-	header("Location: /login");
-	exit;
+    header("Location: /login");
+    exit;
 }
 
 $userAccount = $_SESSION['account'];
 
+require_once "templates/header.php";
+?>
 
-require_once "../templates/header.php";
+<h2>Welcome <?= htmlentities($userAccount->firstName)?></h2>
 
-echo "Welcome " . $userAccount->firstName;
+<p><a href="/chat/">Start Chatting.</a></p>
 
-require_once "../templates/footer.php";
+
+<?php
+require_once "templates/footer.php";
 
  
