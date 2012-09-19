@@ -1,6 +1,6 @@
 <?php
 require_once 'lib/UserAccount.php';
-require_once 'lib/Bcrypt.php';
+require_once 'lib/BCrypt.php';
 require_once 'lib/Redis.php';
 
 

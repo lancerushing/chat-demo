@@ -2,13 +2,13 @@
 
 require_once 'lib/AccountVerifier.php';
 require_once 'lib/UserAccount.php';
-require_once 'lib/Bcrypt.php';
+require_once 'lib/BCrypt.php';
 require_once 'lib/Redis.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-	$verifier = new AccountVerifier();
+	$verifier = new AccountVerifier($redis);
 	$verifier->verifyInput($_POST);
 	if (count($verifier->errors) === 0) {
 		$crypt = new Bcrypt();
@@ -21,7 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 		$userAccount->lastName = $input['last_name'];
 		$userAccount->save($redis);
 
-		echo "<h2>Account Created</h2>";
+
+        session_start();
+        $_SESSION['account'] = $userAccount;
+        header('Location: /');
 		exit;
 	} else {
 		// show errors
