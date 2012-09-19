@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run ChatApp" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/webroot" port="8080" router_script="$PROJECT_DIR$/dev_router.php" use_router_script="true">
-    <CommandLine workingDirectory="$PROJECT_DIR$" />
+    <CommandLine parameters="-d include_path=/Users/lance/Desktop/chat_app" workingDirectory="$PROJECT_DIR$" />
+    <RunnerSettings RunnerId="PhpRunner" />
+    <ConfigurationWrapper RunnerId="PhpRunner" />
     <method />
   </configuration>
 </component>
