@@ -1,5 +1,7 @@
 <?php
 
+echo 'foo';
+
 error_reporting(E_ALL | E_STRICT);
 
 if (isset($_SERVER['REQUEST_URI'] )) {
